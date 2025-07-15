@@ -1,0 +1,30 @@
+## Backend Requirements
+
+- This is the content of backend/requirements.txt — install these via:
+`pip install -r requirements.txt`
+
+```txt
+- fastapi
+- uvicorn[standard]
+- openai
+- langchain
+- SQLAlchemy
+- asyncpg
+- python-dotenv
+- pydantic
+- fastapi[all]
+- loguru
+```
+
+## Frontend Requirements (Handled by npm)
+
+These will be automatically installed with npm install in the frontend/ folder:
+
+```txt
+- next
+- react
+- react-dom
+- typescript
+- axios or native fetch
+- tailwindcss, @headlessui/react, clsx, etc.
+```
