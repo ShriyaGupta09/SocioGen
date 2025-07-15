@@ -1,5 +1,3 @@
-[`youtube channel`](https://www.youtube.com/watch?v=8jg4fSASpP8).
-
 ## Getting Started
 
 First, run the development server:
