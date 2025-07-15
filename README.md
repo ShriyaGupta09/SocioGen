@@ -1,48 +1,124 @@
-# SocioGen
-Full-stack AI-powered application to generate platform-specific social media posts using LangChain and OpenAI.
+# 🛠️ SocioGen — AI Social Media Content Generator
 
-**🔍 Overview**
+SocioGen is a full-stack AI-powered application that generates platform-specific social media content using LangChain and OpenAI. It uses a Next.js frontend, FastAPI backend, and PostgreSQL for data storage. The system is modular, scalable, and perfect for building content generation tools or AI-powered SaaS products.
 
-This project demonstrates how to build a scalable and efficient AI-powered social media content generator using:
+## 🚀 Features
 
-Frontend: Next.js (React-based)
+- Generate posts for Twitter, Instagram, LinkedIn, and Facebook
+- Modular prompt templates powered by LangChain
+- FastAPI backend with OpenAI GPT integration
+- PostgreSQL database to store generated posts
+- REST API communication between frontend and backend
+- Clean architecture and scalable codebase
 
-Backend: FastAPI (high-performance Python API)
+## 🧱 Tech Stack
 
-AI Integration: LangChain + OpenAI API
+- Frontend: Next.js (React + TypeScript)
+- Backend: FastAPI (Python)
+- AI Layer: LangChain + OpenAI GPT
+- Database: PostgreSQL
+- ORM: SQLAlchemy + asyncpg
+- Communication: REST API
 
-Database: PostgreSQL for storing generated content
+## 📁 Project Structure
 
-Prompt Engineering: Custom templates for Twitter, Instagram, LinkedIn, and Facebook
+/postcraft  
+├── backend/  
+│   ├── app/  
+│   │   ├── routers/ → API endpoints  
+│   │   ├── services/ → OpenAI + LangChain logic  
+│   │   ├── schemas/ → Request/response models  
+│   │   ├── db/ → Database models & config  
+│   │   └── main.py → FastAPI entry point  
+│   ├── .env → Environment variables  
+│   └── requirements.txt → Backend dependencies  
+├── frontend/  
+│   ├── pages/ → Next.js routes  
+│   ├── components/ → UI components  
+│   ├── lib/ → API clients  
+│   ├── public/  
+│   └── .env.local → Frontend environment variables  
+└── README.md
 
-**🚀 Features**
+## ⚙️ Backend Setup (FastAPI)
 
-✨ Generate social media posts with AI tailored to different platforms
+1. Go to the `backend` directory:  
+   `cd backend`
 
-📦 Clean and modular architecture for easy scalability
+2. Create and activate a virtual environment:  
+   `python -m venv venv`  
+   `source venv/bin/activate` (Windows: `venv\Scripts\activate`)
 
-🧠 LangChain-powered AI pipelines with OpenAI's GPT models
+3. Install dependencies:  
+   `pip install -r requirements.txt`
 
-💾 Store and manage generated content in PostgreSQL
+4. Create a `.env` file inside `backend/` with the following content:
+   
+   `OPENAI_API_KEY=your-openai-api-key`
+   
+   `DATABASE_URL=postgresql+asyncpg://username:password@localhost:5432/postcraft`
 
-🧱 Well-structured full-stack application with separation of concerns
+6. Run the backend server:  
+   `uvicorn app.main:app --reload`
 
-**📚 Tech Stack**
+7. The API will be available at:  
+   `http://localhost:8000`
 
-Frontend: Next.js, Tailwind CSS (or preferred styling)
+## 🌐 Frontend Setup (Next.js)
 
-Backend: FastAPI, Pydantic
+1. Go to the `frontend` directory:  
+   `cd frontend`
 
-Database: PostgreSQL (via SQLAlchemy or async ORM)
+2. Install dependencies:  
+   `npm install`
 
-AI: OpenAI GPT models, LangChain
+3. Create a `.env.local` file in the `frontend/` directory with the following content:
+   `NEXT_PUBLIC_API_URL=http://localhost:8000`
 
-API Integration: REST API communication between frontend and backend
+4. Start the frontend development server:  
+   `npm run dev`
 
-**💡 Ideal For**
+5. The frontend will be running at:  
+   `http://localhost:3000`
 
-Developers building AI-based content tools
+## 🔗 Connecting Frontend to Backend
 
-Founders prototyping AI SaaS products
+The frontend communicates with the FastAPI backend using the base URL defined in `NEXT_PUBLIC_API_URL`. Make sure the backend is running at `http://localhost:8000` when the frontend is started. Example API call from the frontend:
 
-Anyone exploring LangChain + OpenAI integration in production-ready apps
+```ts
+const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/generate`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    platform: 'twitter',
+    topic: 'langchain use in ai marketing'
+  })
+});
+const data = await res.json();
+```
+
+## 📦API Endpoints
+
+- GET /posts → Returns all saved posts
+
+- POST /save → Save a generated post to PostgreSQL
+
+## 💡Use Cases
+
+- AI tools for automated social media management
+- SaaS prototypes for marketing automation
+- LangChain + OpenAI integration showcase
+- MVPs for AI-powered content startups
+
+## 🛠️ Future Enhancements
+
+- Add JWT or OAuth authentication
+- Add dashboard for post history and analytics
+- Support scheduled post generation
+- Allow dynamic prompt customization
+- Multi-language support
+
+## 📜 License
+MIT License
